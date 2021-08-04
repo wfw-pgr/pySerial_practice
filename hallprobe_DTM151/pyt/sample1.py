@@ -5,8 +5,9 @@ import time
 # --- [0] parameters                            --- #
 # ------------------------------------------------- #
 
-COM           = "COM3"
-COM_lnx       = "/dev/ttys0"
+# COM           = "COM3"
+# COM           = "/dev/ttys0"
+COM           = "/dev/tty.Bluetooth-Incoming-Port"
 bitRate       = 9600
 timeout       = 0.1
 Tsleep        = 0.01
@@ -22,7 +23,6 @@ mode_table    = {"D":"DC mode", "A":"AC mode", "C":"Continuous mode", "V":"trigg
 # ------------------------------------------------- #
 # -- open          -- #
 ser     = serial.Serial( COM, bitRate, timeout=timeout )
-ser.open()
 
 # ------------------------------------------------- #
 # --- [2] settings part                         --- #
@@ -35,7 +35,7 @@ ser.write( b"GD" )
 ser.write( b"IG" )
 time.sleep( Tsleep )
 recv  = ser.read(1)
-print( "[RS232C-DTM-151] mode == {0}".format( table["recv"] ) )
+print( "[RS232C-DTM-151] mode == {0}".format( mode_table["recv"] ) )
 
 # -- Range Settings -- #
 rangeString = range_table[maxRange]
